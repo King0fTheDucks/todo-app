@@ -11,9 +11,24 @@ config_version=5
 [application]
 
 config/name="Todo-app"
-config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
+run/main_scene="uid://bbk27ro3osn8a"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://assets/icon.svg"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=2340
+window/handheld/orientation=1
 
 [dotnet]
 
 project/assembly_name="Todo-app"
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

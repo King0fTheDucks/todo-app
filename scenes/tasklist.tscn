@@ -1,0 +1,198 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyrsfkqp1x5dv"]
+
+[ext_resource type="PackedScene" uid="uid://dqkhn6kahfhu6" path="res://scenes/task.tscn" id="1_oa84m"]
+[ext_resource type="FontFile" uid="uid://ib7upeufjxxf" path="res://resources/fonts/Micro5-Regular.ttf" id="1_thobu"]
+
+[node name="Tasklist" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="BG"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 325.0
+grow_horizontal = 2
+color = Color(0.408329, 0.408329, 0.408329, 1)
+
+[node name="Title" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 325.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="Title"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_thobu")
+theme_override_font_sizes/font_size = 192
+text = "TASKLIST"
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Title"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="AddTask" type="Button" parent="Title/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_thobu")
+theme_override_font_sizes/font_size = 64
+text = "Add Task"
+
+[node name="Settings" type="Button" parent="Title/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_thobu")
+theme_override_font_sizes/font_size = 22
+text = "Settings"
+
+[node name="Tasks" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 325.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="TabContainer" type="TabContainer" parent="Tasks"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_thobu")
+theme_override_font_sizes/font_size = 64
+current_tab = 0
+
+[node name="All" type="MarginContainer" parent="Tasks/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Tasks/TabContainer/All"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tasks/TabContainer/All/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Task" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task2" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task3" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task4" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task5" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task6" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task7" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task8" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task9" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task10" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task11" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task12" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task13" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task14" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Task15" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
+layout_mode = 2
+
+[node name="Today" type="MarginContainer" parent="Tasks/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Tasks/TabContainer/Today"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tasks/TabContainer/Today/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Monthly" type="MarginContainer" parent="Tasks/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Tasks/TabContainer/Monthly"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tasks/TabContainer/Monthly/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Yearly" type="MarginContainer" parent="Tasks/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_tab_index = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Tasks/TabContainer/Yearly"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tasks/TabContainer/Yearly/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15

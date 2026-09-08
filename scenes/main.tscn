@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbk27ro3osn8a"]
+
+[ext_resource type="Script" uid="uid://dqi8dgj7u80vd" path="res://scripts/main.gd" id="1_o5qli"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_o5qli")
+default_scene_path = "res://scenes/tasklist.tscn"
+metadata/_custom_type_script = "uid://dqi8dgj7u80vd"
