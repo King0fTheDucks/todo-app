@@ -2,7 +2,7 @@ class_name Main
 extends Node
 
 @export var default_scene_path: String = "res://"
-var tasks: Array = [["Take out the trash", "8/9/2010"], ["Take the dog for a walk", "Daily"]]
+var tasks: Array[Array] = [["Do the flop", "10/22/2026"], ["Take out the trash", "09/21/2026"], ["Take the dog for a walk", "DAILY"], ["Next year task", "02/22/2027"]]
 var unchecked_ico: Texture2D
 var checked_ico: Texture2D
 
@@ -32,6 +32,9 @@ func next_scene(pth: String, n: String = "Scene0"):
 
 func _process(_delta: float) -> void:
 	pass
+
+func get_tasks() -> Array:
+	return tasks
 
 func get_unchecked_ico() -> Texture2D:
 	return unchecked_ico

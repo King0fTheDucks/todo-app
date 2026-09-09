@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cyrsfkqp1x5dv"]
 
-[ext_resource type="PackedScene" uid="uid://dqkhn6kahfhu6" path="res://scenes/task.tscn" id="1_oa84m"]
+[ext_resource type="Script" uid="uid://dl4dtb7661ucw" path="res://scripts/tasklist.gd" id="1_owosd"]
 [ext_resource type="FontFile" uid="uid://ib7upeufjxxf" path="res://resources/fonts/Micro5-Regular.ttf" id="1_thobu"]
 
 [node name="Tasklist" type="Control"]
@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_owosd")
 
 [node name="BG" type="ColorRect" parent="."]
 layout_mode = 1
@@ -101,51 +102,6 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Task" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task2" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task3" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task4" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task5" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task6" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task7" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task8" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task9" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task10" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task11" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task12" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task13" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task14" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
-[node name="Task15" parent="Tasks/TabContainer/All/ScrollContainer/VBoxContainer" instance=ExtResource("1_oa84m")]
-layout_mode = 2
-
 [node name="Today" type="MarginContainer" parent="Tasks/TabContainer"]
 visible = false
 layout_mode = 2
@@ -156,7 +112,6 @@ theme_override_constants/margin_bottom = 20
 metadata/_tab_index = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Tasks/TabContainer/Today"]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Tasks/TabContainer/Today/ScrollContainer"]
@@ -173,7 +128,6 @@ theme_override_constants/margin_bottom = 20
 metadata/_tab_index = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Tasks/TabContainer/Monthly"]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Tasks/TabContainer/Monthly/ScrollContainer"]
@@ -190,7 +144,6 @@ theme_override_constants/margin_bottom = 20
 metadata/_tab_index = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Tasks/TabContainer/Yearly"]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Tasks/TabContainer/Yearly/ScrollContainer"]
