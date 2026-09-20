@@ -41,7 +41,7 @@ theme_override_font_sizes/font_size = 64
 text = "TAKE OUT THE TRASH
 DO BY: 03/12/2008"
 
-[node name="TextureButton" type="TextureButton" parent="HBoxContainer"]
+[node name="Trash" type="TextureButton" parent="HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2

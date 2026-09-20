@@ -1,10 +1,12 @@
 extends Control
 
+@export var id: int = 0
 @export var taskname: String = ""
 @export var todo_date: String = ""
 @export var completed: bool = false
 
 var icon: TextureButton
+var trash: TextureButton
 var task_label: Label
 var main: Node
 
@@ -12,8 +14,10 @@ func _ready() -> void:
 	main = MainController.get_mainframe(self)
 	icon = get_node("HBoxContainer/Icon")
 	task_label = get_node("HBoxContainer/TaskName")
+	trash = get_node("HBoxContainer/Trash")
 	set_task_label(taskname, todo_date)
 	icon.pressed.connect(_on_icon_pressed)
+	trash.pressed.connect(_on_trash_pressed)
 
 func _process(_delta: float) -> void:
 	if completed == true:
@@ -38,3 +42,8 @@ func set_icon(ico: Texture2D) -> void:
 
 func _on_icon_pressed() -> void:
 	completed = !completed
+	main.call("set_task_complete", id, completed)
+	main.call("next_scene", "res://scenes/tasklist.tscn")
+
+func _on_trash_pressed() -> void:
+	get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().call("confirm_deletion", id, taskname)
