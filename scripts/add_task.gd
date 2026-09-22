@@ -107,7 +107,7 @@ func is_date_valid(date: String) -> bool:
 	return true
 
 func _on_add_pressed() -> void:
-	var new_task: Array = [name_text.text, date_text.text, false]
+	var new_task: Array = [name_text.text, date_text.text.to_upper(), false]
 	main.call("add_task", new_task)
 	main.call("next_scene", "res://scenes/tasklist.tscn")
 

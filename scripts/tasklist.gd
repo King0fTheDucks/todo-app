@@ -7,6 +7,10 @@ var tasks: Array[Array] = []
 
 var add_task: Button
 var tab_container: TabContainer
+var scrollcontainer_all: ScrollContainer
+var scrollcontainer_today: ScrollContainer
+var scrollcontainer_monthly: ScrollContainer
+var scrollcontainer_yearly: ScrollContainer
 var all: VBoxContainer
 var today: VBoxContainer
 var monthly: VBoxContainer
@@ -18,6 +22,10 @@ func _ready() -> void:
 	main = MainController.get_mainframe(self)
 	add_task = get_node("Title/HBoxContainer/AddTask")
 	tab_container = get_node("Tasks/TabContainer")
+	scrollcontainer_all = get_node("Tasks/TabContainer/All/ScrollContainer")
+	scrollcontainer_today = get_node("Tasks/TabContainer/Today/ScrollContainer")
+	scrollcontainer_monthly = get_node("Tasks/TabContainer/Monthly/ScrollContainer")
+	scrollcontainer_yearly = get_node("Tasks/TabContainer/Yearly/ScrollContainer")
 	all = get_node("Tasks/TabContainer/All/ScrollContainer/VBoxContainer")
 	today = get_node("Tasks/TabContainer/Today/ScrollContainer/VBoxContainer")
 	monthly = get_node("Tasks/TabContainer/Monthly/ScrollContainer/VBoxContainer")
@@ -42,9 +50,23 @@ func _ready() -> void:
 					add_task_to_tab(monthly, i)
 					if int(date_split[1]) == day:
 						add_task_to_tab(today, i)
+	scrollcontainer_all.set_deferred("scroll_vertical", main.get("last_scroll_all"))
+	scrollcontainer_today.set_deferred("scroll_vertical", main.get("last_scroll_today"))
+	scrollcontainer_monthly.set_deferred("scroll_vertical", main.get("last_scroll_monthly"))
+	scrollcontainer_yearly.set_deferred("scroll_vertical", main.get("last_scroll_yearly"))
 	tab_container.current_tab = main.get("last_tab")
 	tab_container.tab_changed.connect(_on_tab_changed)
 	add_task.pressed.connect(_on_add_task_pressed)
+
+func _process(_delta: float) -> void:
+	if scrollcontainer_all.scroll_vertical != main.get("last_scroll_all"):
+		main.set("last_scroll_all", scrollcontainer_all.scroll_vertical)
+	if scrollcontainer_today.scroll_vertical != main.get("last_scroll_today"):
+		main.set("last_scroll_today", scrollcontainer_today.scroll_vertical)
+	if scrollcontainer_monthly.scroll_vertical != main.get("last_scroll_monthly"):
+		main.set("last_scroll_monthly", scrollcontainer_monthly.scroll_vertical)
+	if scrollcontainer_yearly.scroll_vertical != main.get("last_scroll_yearly"):
+		main.set("last_scroll_yearly", scrollcontainer_yearly.scroll_vertical)
 
 func add_task_to_tab(tab: VBoxContainer, iteration: int) -> void:
 	var task_instance: PackedScene = load("res://scenes/task.tscn")
