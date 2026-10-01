@@ -11,10 +11,12 @@ var scrollcontainer_all: ScrollContainer
 var scrollcontainer_today: ScrollContainer
 var scrollcontainer_monthly: ScrollContainer
 var scrollcontainer_yearly: ScrollContainer
+var scrollcontainer_past_due: ScrollContainer
 var all: VBoxContainer
 var today: VBoxContainer
 var monthly: VBoxContainer
 var yearly: VBoxContainer
+var past_due: VBoxContainer
 
 var main: Node
 
@@ -26,10 +28,12 @@ func _ready() -> void:
 	scrollcontainer_today = get_node("Tasks/TabContainer/Today/ScrollContainer")
 	scrollcontainer_monthly = get_node("Tasks/TabContainer/Monthly/ScrollContainer")
 	scrollcontainer_yearly = get_node("Tasks/TabContainer/Yearly/ScrollContainer")
+	scrollcontainer_past_due = get_node("Tasks/TabContainer/Past Due/ScrollContainer")
 	all = get_node("Tasks/TabContainer/All/ScrollContainer/VBoxContainer")
 	today = get_node("Tasks/TabContainer/Today/ScrollContainer/VBoxContainer")
 	monthly = get_node("Tasks/TabContainer/Monthly/ScrollContainer/VBoxContainer")
 	yearly = get_node("Tasks/TabContainer/Yearly/ScrollContainer/VBoxContainer")
+	past_due = get_node("Tasks/TabContainer/Past Due/ScrollContainer/VBoxContainer")
 	tasks = main.call("get_tasks")
 	var date_dict: Dictionary = Time.get_date_dict_from_system()
 	day = date_dict.get("day", 0)
@@ -50,10 +54,13 @@ func _ready() -> void:
 					add_task_to_tab(monthly, i)
 					if int(date_split[1]) == day:
 						add_task_to_tab(today, i)
+			if task_past_due(tasks[i][1]):
+				add_task_to_tab(past_due, i)
 	scrollcontainer_all.set_deferred("scroll_vertical", main.get("last_scroll_all"))
 	scrollcontainer_today.set_deferred("scroll_vertical", main.get("last_scroll_today"))
 	scrollcontainer_monthly.set_deferred("scroll_vertical", main.get("last_scroll_monthly"))
 	scrollcontainer_yearly.set_deferred("scroll_vertical", main.get("last_scroll_yearly"))
+	scrollcontainer_past_due.set_deferred("scroll_vertical", main.get("last_scroll_past_due"))
 	tab_container.current_tab = main.get("last_tab")
 	tab_container.tab_changed.connect(_on_tab_changed)
 	add_task.pressed.connect(_on_add_task_pressed)
@@ -67,6 +74,8 @@ func _process(_delta: float) -> void:
 		main.set("last_scroll_monthly", scrollcontainer_monthly.scroll_vertical)
 	if scrollcontainer_yearly.scroll_vertical != main.get("last_scroll_yearly"):
 		main.set("last_scroll_yearly", scrollcontainer_yearly.scroll_vertical)
+	if scrollcontainer_past_due.scroll_vertical != main.get("last_scroll_past_due"):
+		main.set("last_scroll_past_due", scrollcontainer_past_due.scroll_vertical)
 
 func add_task_to_tab(tab: VBoxContainer, iteration: int) -> void:
 	var task_instance: PackedScene = load("res://scenes/task.tscn")
@@ -83,6 +92,22 @@ func confirm_deletion(id: int, taskname: String) -> void:
 	delete_prompt.set("id", id)
 	delete_prompt.set("taskname", taskname)
 	add_child(delete_prompt)
+
+func task_past_due(taskdate: String) -> bool:
+	var list := []
+	list = taskdate.split('/')
+	var due_string = list[2] + list[0] + list[1]
+	var date_string = ""
+	date_string += str(year)
+	if month < 10:
+		date_string += "0" + str(month)
+	else:
+		date_string += str(month)
+	if day < 10:
+		date_string += "0" + str(day)
+	else:
+		date_string += str(day)
+	return int(due_string) < int(date_string)
 
 func _on_tab_changed(tab: int) -> void:
 	main.set("last_tab", tab)

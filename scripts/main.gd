@@ -9,6 +9,7 @@ var last_scroll_all: int = 0
 var last_scroll_today: int = 0
 var last_scroll_monthly: int = 0
 var last_scroll_yearly: int = 0
+var last_scroll_past_due: int = 0
 var unchecked_ico: Texture2D
 var checked_ico: Texture2D
 
