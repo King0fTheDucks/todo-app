@@ -85,6 +85,7 @@ func _ready() -> void:
 	
 	scrollcontainer_all.set_deferred("scroll_vertical", main.get("last_scroll_all"))
 	scrollcontainer_today.set_deferred("scroll_vertical", main.get("last_scroll_today"))
+	scrollcontainer_weekly.set_deferred("scroll_vertical", main.get("last_scroll_weekly"))
 	scrollcontainer_monthly.set_deferred("scroll_vertical", main.get("last_scroll_monthly"))
 	scrollcontainer_yearly.set_deferred("scroll_vertical", main.get("last_scroll_yearly"))
 	scrollcontainer_past_due.set_deferred("scroll_vertical", main.get("last_scroll_past_due"))
@@ -97,6 +98,8 @@ func _process(_delta: float) -> void:
 		main.set("last_scroll_all", scrollcontainer_all.scroll_vertical)
 	if scrollcontainer_today.scroll_vertical != main.get("last_scroll_today"):
 		main.set("last_scroll_today", scrollcontainer_today.scroll_vertical)
+	if scrollcontainer_weekly.scroll_vertical != main.get("last_scroll_weekly"):
+		main.set("last_scroll_weekly", scrollcontainer_weekly.scroll_vertical)
 	if scrollcontainer_monthly.scroll_vertical != main.get("last_scroll_monthly"):
 		main.set("last_scroll_monthly", scrollcontainer_monthly.scroll_vertical)
 	if scrollcontainer_yearly.scroll_vertical != main.get("last_scroll_yearly"):
