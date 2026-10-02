@@ -58,6 +58,8 @@ func load_list() -> Array[Array]:
 	if FileAccess.file_exists(TASKLIST) == false:
 		return []
 	var file: FileAccess = FileAccess.open(TASKLIST, FileAccess.READ)
+	if file.get_length() == 0:
+		return []
 	var text: String = file.get_as_text()
 	file.close()
 	var basic_array: Array = text.split('\\')

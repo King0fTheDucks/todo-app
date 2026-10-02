@@ -3,17 +3,24 @@ extends Control
 var day: int
 var month: int
 var year: int
+var next_week_day: int
+var next_week_month: int
+var next_week_year: int
 var tasks: Array[Array] = []
 
 var add_task: Button
 var tab_container: TabContainer
+
 var scrollcontainer_all: ScrollContainer
 var scrollcontainer_today: ScrollContainer
+var scrollcontainer_weekly: ScrollContainer
 var scrollcontainer_monthly: ScrollContainer
 var scrollcontainer_yearly: ScrollContainer
 var scrollcontainer_past_due: ScrollContainer
+
 var all: VBoxContainer
 var today: VBoxContainer
+var weekly: VBoxContainer
 var monthly: VBoxContainer
 var yearly: VBoxContainer
 var past_due: VBoxContainer
@@ -24,38 +31,58 @@ func _ready() -> void:
 	main = MainController.get_mainframe(self)
 	add_task = get_node("Title/HBoxContainer/AddTask")
 	tab_container = get_node("Tasks/TabContainer")
+	
 	scrollcontainer_all = get_node("Tasks/TabContainer/All/ScrollContainer")
 	scrollcontainer_today = get_node("Tasks/TabContainer/Today/ScrollContainer")
+	scrollcontainer_weekly = get_node("Tasks/TabContainer/Weekly/ScrollContainer")
 	scrollcontainer_monthly = get_node("Tasks/TabContainer/Monthly/ScrollContainer")
 	scrollcontainer_yearly = get_node("Tasks/TabContainer/Yearly/ScrollContainer")
 	scrollcontainer_past_due = get_node("Tasks/TabContainer/Past Due/ScrollContainer")
+	
 	all = get_node("Tasks/TabContainer/All/ScrollContainer/VBoxContainer")
 	today = get_node("Tasks/TabContainer/Today/ScrollContainer/VBoxContainer")
+	weekly = get_node("Tasks/TabContainer/Weekly/ScrollContainer/VBoxContainer")
 	monthly = get_node("Tasks/TabContainer/Monthly/ScrollContainer/VBoxContainer")
 	yearly = get_node("Tasks/TabContainer/Yearly/ScrollContainer/VBoxContainer")
 	past_due = get_node("Tasks/TabContainer/Past Due/ScrollContainer/VBoxContainer")
+	
 	tasks = main.call("get_tasks")
 	var date_dict: Dictionary = Time.get_date_dict_from_system()
 	day = date_dict.get("day", 0)
 	month = date_dict.get("month", 0)
 	year = date_dict.get("year", 0)
+	var current_time: float = Time.get_unix_time_from_system()
+	var next_week_time: float = current_time + (7 * 24 * 60 * 60)
+	@warning_ignore("narrowing_conversion")
+	var next_week_date: Dictionary = Time.get_date_dict_from_unix_time(next_week_time)
+	next_week_day = next_week_date["day"]
+	next_week_month = next_week_date["month"]
+	next_week_year = next_week_date["year"]
+	
 	for i in range(len(tasks)):
 		add_task_to_tab(all, i)
 		if tasks[i][1] == "DAILY":
 			add_task_to_tab(today, i)
+			add_task_to_tab(weekly, i)
 			add_task_to_tab(monthly, i)
 			add_task_to_tab(yearly, i)
 		else:
 			var date_split := []
 			date_split = tasks[i][1].split("/")
+			if task_past_due(tasks[i][1]):
+				add_task_to_tab(past_due, i)
+			else:
+				if int(date_split[2]) <= next_week_year:
+					if int(date_split[0]) <= next_week_month:
+						if int(date_split[1]) <= next_week_day:
+							add_task_to_tab(weekly, i)
 			if int(date_split[2]) == year:
 				add_task_to_tab(yearly, i)
 				if int(date_split[0]) == month:
 					add_task_to_tab(monthly, i)
 					if int(date_split[1]) == day:
 						add_task_to_tab(today, i)
-			if task_past_due(tasks[i][1]):
-				add_task_to_tab(past_due, i)
+	
 	scrollcontainer_all.set_deferred("scroll_vertical", main.get("last_scroll_all"))
 	scrollcontainer_today.set_deferred("scroll_vertical", main.get("last_scroll_today"))
 	scrollcontainer_monthly.set_deferred("scroll_vertical", main.get("last_scroll_monthly"))
