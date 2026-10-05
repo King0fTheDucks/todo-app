@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dqkhn6kahfhu6"]
 
 [ext_resource type="Script" uid="uid://bjn83rww7r3oq" path="res://scripts/task.gd" id="1_5u8vp"]
-[ext_resource type="Texture2D" uid="uid://ddd1vga5oh41j" path="res://assets/unchecked.png" id="2_5u8vp"]
-[ext_resource type="FontFile" uid="uid://ib7upeufjxxf" path="res://resources/fonts/Micro5-Regular.ttf" id="3_3qeyo"]
-[ext_resource type="Texture2D" uid="uid://beet7wv40y2qi" path="res://assets/trash.png" id="4_qe5cv"]
-[ext_resource type="Texture2D" uid="uid://b61tbgxo1x1sg" path="res://assets/edit-ico.png" id="5_mpid7"]
+[ext_resource type="Texture2D" uid="uid://bnnfslykangdy" path="res://assets/unchecked.png" id="2_mpid7"]
+[ext_resource type="FontFile" uid="uid://gxc5w6jvgtuo" path="res://resources/fonts/Quantico-Regular.ttf" id="3_mpid7"]
+[ext_resource type="Texture2D" uid="uid://no0wf1m34pqf" path="res://assets/trash.png" id="4_nrbgo"]
+[ext_resource type="Texture2D" uid="uid://c6s5fkq3g80ie" path="res://assets/edit-ico.png" id="5_yx810"]
 
 [node name="Task" type="Control"]
 custom_minimum_size = Vector2(0, 140)
@@ -18,6 +18,7 @@ grow_vertical = 2
 script = ExtResource("1_5u8vp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -25,41 +26,38 @@ mouse_filter = 2
 theme_override_constants/separation = 16
 
 [node name="Icon" type="TextureButton" parent="HBoxContainer"]
-texture_filter = 1
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-texture_normal = ExtResource("2_5u8vp")
-texture_pressed = ExtResource("2_5u8vp")
-texture_hover = ExtResource("2_5u8vp")
-texture_disabled = ExtResource("2_5u8vp")
-texture_focused = ExtResource("2_5u8vp")
+texture_normal = ExtResource("2_mpid7")
+texture_pressed = ExtResource("2_mpid7")
+texture_hover = ExtResource("2_mpid7")
+texture_disabled = ExtResource("2_mpid7")
+texture_focused = ExtResource("2_mpid7")
 stretch_mode = 0
 
 [node name="TaskName" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_3qeyo")
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("3_mpid7")
+theme_override_font_sizes/font_size = 32
 text = "TAKE OUT THE TRASH
 DO BY: 03/12/2008"
 
 [node name="Trash" type="TextureButton" parent="HBoxContainer"]
 texture_filter = 1
-custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-texture_normal = ExtResource("4_qe5cv")
-texture_pressed = ExtResource("4_qe5cv")
-texture_hover = ExtResource("4_qe5cv")
-texture_disabled = ExtResource("4_qe5cv")
-texture_focused = ExtResource("4_qe5cv")
+texture_normal = ExtResource("4_nrbgo")
+texture_pressed = ExtResource("4_nrbgo")
+texture_hover = ExtResource("4_nrbgo")
+texture_disabled = ExtResource("4_nrbgo")
+texture_focused = ExtResource("4_nrbgo")
 stretch_mode = 0
 
 [node name="EditButton" type="TextureButton" parent="HBoxContainer"]
-texture_filter = 1
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-texture_normal = ExtResource("5_mpid7")
-texture_pressed = ExtResource("5_mpid7")
-texture_hover = ExtResource("5_mpid7")
-texture_disabled = ExtResource("5_mpid7")
-texture_focused = ExtResource("5_mpid7")
+texture_normal = ExtResource("5_yx810")
+texture_pressed = ExtResource("5_yx810")
+texture_hover = ExtResource("5_yx810")
+texture_disabled = ExtResource("5_yx810")
+texture_focused = ExtResource("5_yx810")
 stretch_mode = 0

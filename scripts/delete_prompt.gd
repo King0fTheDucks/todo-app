@@ -8,9 +8,9 @@ var no: Button
 
 func _ready() -> void:
 	title_label = get_node("MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Label")
-	yes = get_node("MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation/Yes")
-	no = get_node("MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation/No")
-	title_label.text = "Delete task entry \"" + taskname + "\"?"
+	yes = get_node("MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/Confirmation/Yes")
+	no = get_node("MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/Confirmation/No")
+	title_label.text = "Delete task entry \"" + taskname + "\"?\n\n\n"
 	yes.pressed.connect(_on_yes_pressed)
 	no.pressed.connect(_on_no_pressed)
 

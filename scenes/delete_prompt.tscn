@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dpe06for8nr66"]
 
 [ext_resource type="Script" uid="uid://k03447umqvy4" path="res://scripts/delete_prompt.gd" id="1_mwvde"]
-[ext_resource type="FontFile" uid="uid://ib7upeufjxxf" path="res://resources/fonts/Micro5-Regular.ttf" id="2_5dbim"]
+[ext_resource type="FontFile" uid="uid://gxc5w6jvgtuo" path="res://resources/fonts/Quantico-Regular.ttf" id="2_5dbim"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_atisp"]
 bg_color = Color(0.0855738, 4.49346e-08, 1.35368e-08, 1)
@@ -25,12 +25,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 20
+theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 1000
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 1000
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_atisp")
 
@@ -59,23 +60,23 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_5dbim")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "Delete task entry \"\"?"
 autowrap_mode = 2
 
-[node name="Confirmation" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Confirmation" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="Yes" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation"]
+[node name="Yes" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/Confirmation"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_5dbim")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "YES"
 
-[node name="No" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Confirmation"]
+[node name="No" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/PanelContainer/MarginContainer/Confirmation"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_5dbim")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "NO"

@@ -1,7 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyrsfkqp1x5dv"]
+[gd_scene load_steps=9 format=3 uid="uid://cyrsfkqp1x5dv"]
 
 [ext_resource type="Script" uid="uid://dl4dtb7661ucw" path="res://scripts/tasklist.gd" id="1_owosd"]
-[ext_resource type="FontFile" uid="uid://ib7upeufjxxf" path="res://resources/fonts/Micro5-Regular.ttf" id="1_thobu"]
+[ext_resource type="FontFile" uid="uid://gxc5w6jvgtuo" path="res://resources/fonts/Quantico-Regular.ttf" id="2_thobu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thobu"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owosd"]
+bg_color = Color(0.359069, 0.359069, 0.359069, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_alwuc"]
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5i16"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0fhs"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.796243, 0.796243, 0.796243, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8u7u2"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.310617, 0.310617, 0.310617, 1)
 
 [node name="Tasklist" type="Control"]
 layout_mode = 3
@@ -19,6 +54,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="ColorRect" type="ColorRect" parent="BG"]
 layout_mode = 1
@@ -43,8 +79,8 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("1_thobu")
-theme_override_font_sizes/font_size = 192
+theme_override_fonts/font = ExtResource("2_thobu")
+theme_override_font_sizes/font_size = 128
 text = "TASKLIST"
 vertical_alignment = 2
 
@@ -57,14 +93,14 @@ size_flags_vertical = 8
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("1_thobu")
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("2_thobu")
+theme_override_font_sizes/font_size = 32
 text = "Add Task"
 
 [node name="Settings" type="Button" parent="Title/HBoxContainer"]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_thobu")
+theme_override_fonts/font = ExtResource("2_thobu")
 theme_override_font_sizes/font_size = 22
 text = "Settings"
 
@@ -83,8 +119,14 @@ theme_override_constants/margin_bottom = 30
 
 [node name="TabContainer" type="TabContainer" parent="Tasks"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_thobu")
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("2_thobu")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/tab_focus = SubResource("StyleBoxFlat_thobu")
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_owosd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_alwuc")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_m5i16")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_e0fhs")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_8u7u2")
 current_tab = 0
 
 [node name="All" type="MarginContainer" parent="Tasks/TabContainer"]
