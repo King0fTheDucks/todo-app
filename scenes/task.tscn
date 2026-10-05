@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqkhn6kahfhu6"]
+[gd_scene load_steps=6 format=3 uid="uid://dqkhn6kahfhu6"]
 
 [ext_resource type="Script" uid="uid://bjn83rww7r3oq" path="res://scripts/task.gd" id="1_5u8vp"]
 [ext_resource type="Texture2D" uid="uid://ddd1vga5oh41j" path="res://assets/unchecked.png" id="2_5u8vp"]
 [ext_resource type="FontFile" uid="uid://ib7upeufjxxf" path="res://resources/fonts/Micro5-Regular.ttf" id="3_3qeyo"]
 [ext_resource type="Texture2D" uid="uid://beet7wv40y2qi" path="res://assets/trash.png" id="4_qe5cv"]
+[ext_resource type="Texture2D" uid="uid://b61tbgxo1x1sg" path="res://assets/edit-ico.png" id="5_mpid7"]
 
 [node name="Task" type="Control"]
 custom_minimum_size = Vector2(0, 140)
@@ -50,4 +51,15 @@ texture_pressed = ExtResource("4_qe5cv")
 texture_hover = ExtResource("4_qe5cv")
 texture_disabled = ExtResource("4_qe5cv")
 texture_focused = ExtResource("4_qe5cv")
+stretch_mode = 0
+
+[node name="EditButton" type="TextureButton" parent="HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture_normal = ExtResource("5_mpid7")
+texture_pressed = ExtResource("5_mpid7")
+texture_hover = ExtResource("5_mpid7")
+texture_disabled = ExtResource("5_mpid7")
+texture_focused = ExtResource("5_mpid7")
 stretch_mode = 0

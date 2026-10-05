@@ -7,6 +7,7 @@ extends Control
 
 var icon: TextureButton
 var trash: TextureButton
+var edit: TextureButton
 var task_label: Label
 var main: Node
 
@@ -15,9 +16,11 @@ func _ready() -> void:
 	icon = get_node("HBoxContainer/Icon")
 	task_label = get_node("HBoxContainer/TaskName")
 	trash = get_node("HBoxContainer/Trash")
+	edit = get_node("HBoxContainer/EditButton")
 	set_task_label(taskname, todo_date)
 	icon.pressed.connect(_on_icon_pressed)
 	trash.pressed.connect(_on_trash_pressed)
+	edit.pressed.connect(_on_edit_button_pressed)
 
 func _process(_delta: float) -> void:
 	if completed == true:
@@ -47,3 +50,7 @@ func _on_icon_pressed() -> void:
 
 func _on_trash_pressed() -> void:
 	get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().call("confirm_deletion", id, taskname)
+
+func _on_edit_button_pressed() -> void:
+	main.call("goto_edit_scene", id, taskname, todo_date)
+	#print("Edit button pressed. ID #" + str(id) + ". \nTaskname \"" + taskname + "\" \nDate to be completed: \"" + todo_date + "\"")

@@ -74,6 +74,17 @@ func load_list() -> Array[Array]:
 		completed_array.append(task)
 	return completed_array
 
+func goto_edit_scene(id: int, taskname: String, todo_date: String, n: String = "Scene0"):
+	remove_scene(n)
+	var scn_instance = load("res://scenes/add_task.tscn")
+	var scn = scn_instance.instantiate()
+	scn.name = n
+	scn.edit_mode = true
+	scn.edit_id = id
+	scn.edit_name = taskname
+	scn.edit_todo_date = todo_date
+	add_child(scn)
+
 func set_task_complete(id: int, complete: bool) -> void:
 	tasks[id][2] = complete
 	save_list()
@@ -84,6 +95,10 @@ func set_tasks(new: Array[Array]) -> void:
 
 func add_task(new: Array) -> void:
 	tasks.append(new)
+	save_list()
+
+func edit_task(id: int, new: Array) -> void:
+	tasks[id] = new
 	save_list()
 
 func get_tasks() -> Array:
