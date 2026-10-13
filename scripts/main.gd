@@ -4,7 +4,7 @@ extends Node
 @export var default_scene_path: String = "res://"
 const TASKLIST: String = "user://tasklist.txt"
 const LAST_DATE: String = "user://last_date.date"
-var tasks: Array[Array] = []
+var tasks: Array[Array] = [] # Formatted as: ["TASKNAME", "MM/DD/YYYY", true/false]
 var last_tab: int = 0
 var last_scroll_all: int = 0
 var last_scroll_today: int = 0
@@ -17,6 +17,7 @@ var checked_ico: Texture2D
 
 func _ready() -> void:
 	tasks = load_list()
+	sort_tasks()
 	unchecked_ico = preload("res://assets/unchecked.png")
 	checked_ico = preload("res://assets/checked.png")
 	add_scene(default_scene_path)
@@ -89,9 +90,17 @@ func load_date() -> Array[int]:
 		return [1, 1, 2000]
 	var text: String = file.get_as_text()
 	file.close()
-	var string_array: Array[String] = text.split("/")
+	var string_array: PackedStringArray = text.split("/")
 	var final_array: Array[int] = [int(string_array[0]), int(string_array[1]), int(string_array[2])]
 	return final_array
+
+func check_date(m: int, d: int, y: int) -> void:
+	if load_date() != [m, d, y]:
+		for i in len(tasks):
+			if tasks[i][1] == "DAILY":
+				tasks[i][2] = false
+	save_list()
+	save_date(m, d, y)
 
 func goto_edit_scene(id: int, taskname: String, todo_date: String, n: String = "Scene0"):
 	remove_scene(n)
@@ -110,15 +119,58 @@ func set_task_complete(id: int, complete: bool) -> void:
 
 func set_tasks(new: Array[Array]) -> void:
 	tasks = new
+	sort_tasks()
 	save_list()
 
 func add_task(new: Array) -> void:
 	tasks.append(new)
+	sort_tasks()
 	save_list()
 
 func edit_task(id: int, new: Array) -> void:
 	tasks[id] = new
+	sort_tasks()
 	save_list()
+
+func sort_tasks() -> void:
+	tasks.sort_custom(func(a: Array, b: Array) -> bool:
+		var date_a: String = str(a[1])
+		var date_b: String = str(b[1])
+		
+		if date_a == "DAILY" and date_b != "DAILY":
+			return true
+		if date_b == "DAILY" and date_a != "DAILY":
+			return false
+		
+		if date_a == "DAILY" and date_b == "DAILY":
+			return str(a[0]).to_lower() < str(b[0]).to_lower()
+		
+		var parts_a: PackedStringArray = date_a.split("/")
+		var parts_b: PackedStringArray = date_b.split("/")
+		
+		var timestamp_a: int = int(Time.get_unix_time_from_datetime_dict({
+			"year": int(parts_a[2]),
+			"month": int(parts_a[0]),
+			"day": int(parts_a[1]),
+			"hour": 0,
+			"minute": 0,
+			"second": 0
+		}))
+		
+		var timestamp_b: int = int(Time.get_unix_time_from_datetime_dict({
+			"year": int(parts_b[2]),
+			"month": int(parts_b[0]),
+			"day": int(parts_b[1]),
+			"hour": 0,
+			"minute": 0,
+			"second": 0
+		}))
+	
+		if timestamp_a != timestamp_b:
+			return timestamp_a < timestamp_b
+		
+		return str(a[0]).to_lower() < str(b[0]).to_lower()
+	)
 
 func get_tasks() -> Array:
 	return tasks
