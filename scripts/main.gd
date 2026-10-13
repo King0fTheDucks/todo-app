@@ -3,6 +3,7 @@ extends Node
 
 @export var default_scene_path: String = "res://"
 const TASKLIST: String = "user://tasklist.txt"
+const LAST_DATE: String = "user://last_date.date"
 var tasks: Array[Array] = []
 var last_tab: int = 0
 var last_scroll_all: int = 0
@@ -73,6 +74,24 @@ func load_list() -> Array[Array]:
 			task[2] = false
 		completed_array.append(task)
 	return completed_array
+
+func save_date(m: int, d: int, y: int) -> void:
+	var file: FileAccess = FileAccess.open(LAST_DATE, FileAccess.WRITE)
+	file.store_string(str(m) + "/" + str(d) + "/" + str(y))
+	file.close()
+
+func load_date() -> Array[int]:
+	if !FileAccess.file_exists(TASKLIST):
+		return [1, 1, 2000]
+	var file: FileAccess = FileAccess.open(LAST_DATE, FileAccess.READ)
+	if file.get_length() == 0:
+		printerr("ERROR: File length of \'" + LAST_DATE + "\' is zero.")
+		return [1, 1, 2000]
+	var text: String = file.get_as_text()
+	file.close()
+	var string_array: Array[String] = text.split("/")
+	var final_array: Array[int] = [int(string_array[0]), int(string_array[1]), int(string_array[2])]
+	return final_array
 
 func goto_edit_scene(id: int, taskname: String, todo_date: String, n: String = "Scene0"):
 	remove_scene(n)

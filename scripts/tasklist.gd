@@ -59,6 +59,8 @@ func _ready() -> void:
 	next_week_month = next_week_date["month"]
 	next_week_year = next_week_date["year"]
 	
+	main.call("save_date", month, day, year)
+	
 	for i in range(len(tasks)):
 		add_task_to_tab(all, i)
 		if tasks[i][1] == "DAILY":
