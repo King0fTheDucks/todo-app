@@ -8,6 +8,7 @@ extends Control
 var name_valid: bool = false
 var date_valid: bool = false
 
+var bg: ColorRect
 var name_text: TextEdit
 var date_text: TextEdit
 var title_label: Label
@@ -19,6 +20,11 @@ var main: Node
 
 func _ready() -> void:
 	main = MainController.get_mainframe(self)
+	bg = get_node("BG")
+	if main.get("dark_mode"):
+		bg.color = Color(0, 0, 0)
+	else:
+		bg.color = Color(255, 255, 255)
 	title_label = get_node("Title/Label")
 	name_text = get_node("TaskArgs/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/NameText")
 	date_text = get_node("TaskArgs/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/DateText")

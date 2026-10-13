@@ -8,6 +8,8 @@ var next_week_month: int
 var next_week_year: int
 var tasks: Array[Array] = []
 
+var bg: ColorRect
+var settings: Button
 var add_task: Button
 var tab_container: TabContainer
 
@@ -29,6 +31,12 @@ var main: Node
 
 func _ready() -> void:
 	main = MainController.get_mainframe(self)
+	bg = get_node("BG")
+	if main.get("dark_mode"):
+		bg.color = Color(0, 0, 0)
+	else:
+		bg.color = Color(255, 255, 255)
+	settings = get_node("Title/HBoxContainer/Settings")
 	add_task = get_node("Title/HBoxContainer/AddTask")
 	tab_container = get_node("Tasks/TabContainer")
 	
@@ -93,6 +101,7 @@ func _ready() -> void:
 	scrollcontainer_past_due.set_deferred("scroll_vertical", main.get("last_scroll_past_due"))
 	tab_container.current_tab = main.get("last_tab")
 	tab_container.tab_changed.connect(_on_tab_changed)
+	settings.pressed.connect(_on_settings_pressed)
 	add_task.pressed.connect(_on_add_task_pressed)
 
 func _process(_delta: float) -> void:
@@ -143,6 +152,9 @@ func task_past_due(taskdate: String) -> bool:
 
 func _on_tab_changed(tab: int) -> void:
 	main.set("last_tab", tab)
+
+func _on_settings_pressed() -> void:
+	main.call("next_scene", "res://scenes/settings.tscn")
 
 func _on_add_task_pressed() -> void:
 	main.call("next_scene", "res://scenes/add_task.tscn")

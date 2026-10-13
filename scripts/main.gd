@@ -12,14 +12,18 @@ var last_scroll_weekly: int = 0
 var last_scroll_monthly: int = 0
 var last_scroll_yearly: int = 0
 var last_scroll_past_due: int = 0
+var dark_mode: bool = false
+var classic_checks: bool = false
 var unchecked_ico: Texture2D
 var checked_ico: Texture2D
+var classic_checked_ico: Texture2D
 
 func _ready() -> void:
 	tasks = load_list()
 	sort_tasks()
 	unchecked_ico = preload("res://assets/unchecked.png")
 	checked_ico = preload("res://assets/checked.png")
+	classic_checked_ico = preload("res://assets/old/checked_new.png")
 	add_scene(default_scene_path)
 
 func add_scene(pth: String, n: String = "Scene0"):
@@ -179,4 +183,6 @@ func get_unchecked_ico() -> Texture2D:
 	return unchecked_ico
 
 func get_checked_ico() -> Texture2D:
+	if classic_checks:
+		return classic_checked_ico
 	return checked_ico
