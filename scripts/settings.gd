@@ -63,7 +63,7 @@ func _on_classic_checks_button_pressed() -> void:
 func _on_save_pressed() -> void:
 	main.set("dark_mode", dark_mode_setting)
 	main.set("classic_checks", classic_checks_setting)
-	# TODO: Add saving settings to a file in main.gd
+	main.call("save_settings")
 	main.call("next_scene", "res://scenes/tasklist.tscn")
 
 func _on_cancel_pressed() -> void:

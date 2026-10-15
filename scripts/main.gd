@@ -3,7 +3,8 @@ extends Node
 
 @export var default_scene_path: String = "res://"
 const TASKLIST: String = "user://tasklist.txt"
-const LAST_DATE: String = "user://last_date.date"
+const SETTINGS: String = "user://settings.set"
+const LAST_DATE: String = "user://last_date.day"
 var tasks: Array[Array] = [] # Formatted as: ["TASKNAME", "MM/DD/YYYY", true/false]
 var last_tab: int = 0
 var last_scroll_all: int = 0
@@ -12,8 +13,10 @@ var last_scroll_weekly: int = 0
 var last_scroll_monthly: int = 0
 var last_scroll_yearly: int = 0
 var last_scroll_past_due: int = 0
-var dark_mode: bool = false
-var classic_checks: bool = false
+
+var dark_mode: bool = false # Settings ID 0
+var classic_checks: bool = false # Settings ID 1
+
 var unchecked_ico: Texture2D
 var checked_ico: Texture2D
 var classic_checked_ico: Texture2D
@@ -80,13 +83,27 @@ func load_list() -> Array[Array]:
 		completed_array.append(task)
 	return completed_array
 
+func save_settings() -> void:
+	var text: String = ""
+	if dark_mode:
+		text += str(1)
+	else:
+		text += str(0)
+	if classic_checks:
+		text += str(1)
+	else:
+		text += str(0)
+	var file: FileAccess = FileAccess.open(SETTINGS , FileAccess.WRITE)
+	file.store_string(text)
+	file.close()
+
 func save_date(m: int, d: int, y: int) -> void:
 	var file: FileAccess = FileAccess.open(LAST_DATE, FileAccess.WRITE)
 	file.store_string(str(m) + "/" + str(d) + "/" + str(y))
 	file.close()
 
 func load_date() -> Array[int]:
-	if !FileAccess.file_exists(TASKLIST):
+	if !FileAccess.file_exists(LAST_DATE):
 		return [1, 1, 2000]
 	var file: FileAccess = FileAccess.open(LAST_DATE, FileAccess.READ)
 	if file.get_length() == 0:
