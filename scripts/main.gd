@@ -24,6 +24,7 @@ var classic_checked_ico: Texture2D
 func _ready() -> void:
 	tasks = load_list()
 	sort_tasks()
+	load_settings()
 	unchecked_ico = preload("res://assets/unchecked.png")
 	checked_ico = preload("res://assets/checked.png")
 	classic_checked_ico = preload("res://assets/old/checked_new.png")
@@ -96,6 +97,28 @@ func save_settings() -> void:
 	var file: FileAccess = FileAccess.open(SETTINGS , FileAccess.WRITE)
 	file.store_string(text)
 	file.close()
+
+func load_settings() -> void:
+	if !FileAccess.file_exists(SETTINGS):
+		dark_mode = false
+		classic_checks = false
+		return
+	var file: FileAccess = FileAccess.open(SETTINGS, FileAccess.READ)
+	if file.get_length() == 0:
+		printerr("ERROR: File length of \'" + SETTINGS + "\' is zero.")
+		dark_mode = false
+		classic_checks = false
+		return
+	var text: String = file.get_as_text()
+	file.close()
+	if (int(text[0]) == 1):
+		dark_mode = true
+	else:
+		dark_mode = false
+	if (int(text[1]) == 1):
+		classic_checks = true
+	else:
+		classic_checks = false
 
 func save_date(m: int, d: int, y: int) -> void:
 	var file: FileAccess = FileAccess.open(LAST_DATE, FileAccess.WRITE)
